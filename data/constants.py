@@ -7,7 +7,7 @@ SCREEN_SIZE = (SCREEN_WIDTH,SCREEN_HEIGHT)
 
 ORIGINAL_CAPTION = "Super Mario Bros 1-1"
 
-# COLORS 
+# COLORS
 #            R    G    B
 GRAY         = (100, 100, 100)
 NAVYBLUE     = ( 60,  60, 100)
