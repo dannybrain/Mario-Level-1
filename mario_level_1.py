@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 __author__ = 'justinarmstrong'
 
 """
@@ -9,10 +9,9 @@ Super Mario Bros for the NES.
 import sys
 import pygame as pg
 from data.main import main
-import cProfile
+# this one is unused : import cProfile
 
-
-if __name__=='__main__':
+if __name__ == '__main__':
     main()
     pg.quit()
     sys.exit()

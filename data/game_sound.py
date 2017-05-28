@@ -4,6 +4,7 @@ import pygame as pg
 from . import setup
 from . import constants as c
 
+
 class Sound(object):
     """Handles all sound for the game"""
     def __init__(self, overhead_info):
@@ -13,8 +14,6 @@ class Sound(object):
         self.overhead_info = overhead_info
         self.game_info = overhead_info.game_info
         self.set_music_mixer()
-
-
 
     def set_music_mixer(self):
         """Sets music for level"""
@@ -27,26 +26,23 @@ class Sound(object):
             pg.mixer.music.play()
             self.state = c.GAME_OVER
 
-
     def update(self, game_info, mario):
         """Updates sound object with game info"""
         self.game_info = game_info
         self.mario = mario
         self.handle_state()
 
-    def  handle_state(self):
+    def handle_state(self):
         """Handles the state of the soundn object"""
         if self.state == c.NORMAL:
             if self.mario.dead:
                 self.play_music('death', c.MARIO_DEAD)
-            elif self.mario.invincible \
-                    and self.mario.losing_invincibility == False:
+            elif self.mario.invincible and not self.mario.losing_invincibility:
                 self.play_music('invincible', c.MARIO_INVINCIBLE)
             elif self.mario.state == c.FLAGPOLE:
                 self.play_music('flagpole', c.FLAGPOLE)
             elif self.overhead_info.time == 100:
                 self.play_music('out_of_time', c.TIME_WARNING)
-
 
         elif self.state == c.FLAGPOLE:
             if self.mario.state == c.WALKING_TO_CASTLE:
@@ -80,7 +76,6 @@ class Sound(object):
             elif self.mario.dead:
                 self.play_music('death', c.MARIO_DEAD)
 
-
         elif self.state == c.WORLD_CLEAR:
             pass
         elif self.state == c.MARIO_DEAD:
@@ -97,6 +92,3 @@ class Sound(object):
     def stop_music(self):
         """Stops playback"""
         pg.mixer.music.stop()
-
-
-

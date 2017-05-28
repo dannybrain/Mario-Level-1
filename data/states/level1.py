@@ -16,7 +16,6 @@ from .. components import info
 from .. components import score
 from .. components import castle_flag
 
-
 class Level1(tools._State):
     def __init__(self):
         tools._State.__init__(self)

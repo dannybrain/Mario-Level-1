@@ -4,12 +4,13 @@ import os
 import pygame as pg
 
 keybinding = {
-    'action':pg.K_s,
-    'jump':pg.K_a,
-    'left':pg.K_LEFT,
-    'right':pg.K_RIGHT,
-    'down':pg.K_DOWN
+    'action': pg.K_s,
+    'jump': pg.K_a,
+    'left': pg.K_LEFT,
+    'right': pg.K_RIGHT,
+    'down': pg.K_DOWN
 }
+
 
 class Control(object):
     """Control class for entire project. Contains the game loop, and contains
@@ -48,7 +49,6 @@ class Control(object):
         self.state.startup(self.current_time, persist)
         self.state.previous = previous
 
-
     def event_loop(self):
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -60,13 +60,11 @@ class Control(object):
                 self.keys = pg.key.get_pressed()
             self.state.get_event(event)
 
-
     def toggle_show_fps(self, key):
         if key == pg.K_F5:
             self.show_fps = not self.show_fps
             if not self.show_fps:
                 pg.display.set_caption(self.caption)
-
 
     def main(self):
         """Main loop for entire program"""
@@ -106,8 +104,8 @@ class _State(object):
         pass
 
 
-
-def load_all_gfx(directory, colorkey=(255,0,255), accept=('.png', 'jpg', 'bmp')):
+def load_all_gfx(directory, colorkey=(255, 0, 255),
+                 accept=('.png', 'jpg', 'bmp')):
     graphics = {}
     for pic in os.listdir(directory):
         name, ext = os.path.splitext(pic)
@@ -118,14 +116,17 @@ def load_all_gfx(directory, colorkey=(255,0,255), accept=('.png', 'jpg', 'bmp'))
             else:
                 img = img.convert()
                 img.set_colorkey(colorkey)
-            graphics[name]=img
+            graphics[name] = img
     return graphics
 
 
-def load_all_music(directory, accept=('.wav', '.mp3', '.ogg', '.mdi')):
+def load_all_music(directory, accept=('.wav',
+                                      '.mp3',
+                                      '.ogg',
+                                      '.mdi')):
     songs = {}
     for song in os.listdir(directory):
-        name,ext = os.path.splitext(song)
+        name, ext = os.path.splitext(song)
         if ext.lower() in accept:
             songs[name] = os.path.join(directory, song)
     return songs
@@ -135,21 +136,13 @@ def load_all_fonts(directory, accept=('.ttf')):
     return load_all_music(directory, accept)
 
 
-def load_all_sfx(directory, accept=('.wav','.mpe','.ogg','.mdi')):
+def load_all_sfx(directory, accept=('.wav',
+                                    '.mpe',
+                                    '.ogg',
+                                    '.mdi')):
     effects = {}
     for fx in os.listdir(directory):
         name, ext = os.path.splitext(fx)
         if ext.lower() in accept:
             effects[name] = pg.mixer.Sound(os.path.join(directory, fx))
     return effects
-
-
-
-
-
-
-
-
-
-
-

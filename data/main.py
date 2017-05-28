@@ -1,8 +1,11 @@
 __author__ = 'justinarmstrong'
 
-from . import setup,tools
-from .states import main_menu,load_screen,level1
-from . import constants as c
+from data import tools
+from data import constants as c
+from data import setup
+from data.states import main_menu
+from data.states import load_screen
+from data.states import level1
 
 
 def main():
@@ -16,6 +19,3 @@ def main():
 
     run_it.setup_states(state_dict, c.MAIN_MENU)
     run_it.main()
-
-
-
