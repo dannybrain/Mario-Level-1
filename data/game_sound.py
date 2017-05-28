@@ -1,12 +1,13 @@
 __author__ = 'justinarmstrong'
 
 import pygame as pg
-from . import setup
-from . import constants as c
+from data import setup
+from data import constants as c
 
 
 class Sound(object):
     """Handles all sound for the game"""
+
     def __init__(self, overhead_info):
         """Initialize the class"""
         self.sfx_dict = setup.SFX
