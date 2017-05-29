@@ -14,7 +14,6 @@ from data.components import info
 from data.components import score
 from data.components import castle_flag
 
-
 class Level1(tools._State):
 
     def __init__(self):
@@ -56,8 +55,10 @@ class Level1(tools._State):
         self.background = setup.GFX['level_1']
         self.back_rect = self.background.get_rect()
         self.background = pg.transform.scale(self.background,
-                                             (int(self.back_rect.width * c.BACKGROUND_MULTIPLER),
-                                              int(self.back_rect.height * c.BACKGROUND_MULTIPLER))
+                                             (int(self.back_rect.width *
+                                              c.BACKGROUND_MULTIPLER),
+                                              int(self.back_rect.height *
+                                              c.BACKGROUND_MULTIPLER))
                                              )
         self.back_rect = self.background.get_rect()
         width = self.back_rect.width
@@ -577,10 +578,10 @@ class Level1(tools._State):
                     score.Score(self.mario.rect.centerx - self.viewport.x,
                                 self.mario.rect.y, 1000))
 
-                if self.mario.big and self.mario.fire == False:
+                if self.mario.big and self.mario.fire is False:
                     self.mario.state = c.BIG_TO_FIRE
                     self.mario.in_transition_state = True
-                elif self.mario.big == False:
+                elif self.mario.big is False:
                     self.mario.state = c.SMALL_TO_BIG
                     self.mario.in_transition_state = True
                     self.convert_mushrooms_to_fireflowers()

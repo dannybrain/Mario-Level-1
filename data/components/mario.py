@@ -1,9 +1,9 @@
 __author__ = 'justinarmstrong'
 
 import pygame as pg
-from .. import setup, tools
-from .. import constants as c
-from . import powerups
+from data import setup, tools
+from data import constants as c
+from data.components import powerups
 
 
 class Mario(pg.sprite.Sprite):
@@ -24,7 +24,6 @@ class Mario(pg.sprite.Sprite):
 
         self.key_timer = 0
 
-
     def setup_timers(self):
         """Sets up timers for animations"""
         self.walking_timer = 0
@@ -37,7 +36,6 @@ class Mario(pg.sprite.Sprite):
         self.hurt_invisible_timer = 0
         self.hurt_invisible_timer2 = 0
         self.flag_pole_timer = 0
-
 
     def setup_state_booleans(self):
         """Sets up booleans that affect Mario's behavior"""
@@ -54,7 +52,6 @@ class Mario(pg.sprite.Sprite):
         self.crouching = False
         self.losing_invincibility = False
 
-
     def setup_forces(self):
         """Sets up forces that affect Mario's velocity"""
         self.x_vel = 0
@@ -65,7 +62,6 @@ class Mario(pg.sprite.Sprite):
         self.jump_vel = c.JUMP_VEL
         self.gravity = c.GRAVITY
 
-
     def setup_counters(self):
         """These keep track of various total for important values"""
         self.frame_index = 0
@@ -73,7 +69,6 @@ class Mario(pg.sprite.Sprite):
         self.fire_transition_index = 0
         self.fireball_count = 0
         self.flag_pole_right = 0
-
 
     def load_images_from_sheet(self):
         """Extracts Mario images from his sprite sheet and assigns
@@ -103,16 +98,15 @@ class Mario(pg.sprite.Sprite):
         self.left_fire_frames = []
 
 
-        #Images for normal small mario#
-
+        # Images for normal small mario#
         self.right_small_normal_frames.append(
             self.get_image(178, 32, 12, 16))  # Right [0]
         self.right_small_normal_frames.append(
-            self.get_image(80,  32, 15, 16))  # Right walking 1 [1]
+            self.get_image(80, 32, 15, 16))  # Right walking 1 [1]
         self.right_small_normal_frames.append(
-            self.get_image(96,  32, 16, 16))  # Right walking 2 [2]
+            self.get_image(96, 32, 16, 16))  # Right walking 2 [2]
         self.right_small_normal_frames.append(
-            self.get_image(112,  32, 16, 16))  # Right walking 3 [3]
+            self.get_image(112, 32, 16, 16))  # Right walking 3 [3]
         self.right_small_normal_frames.append(
             self.get_image(144, 32, 16, 16))  # Right jump [4]
         self.right_small_normal_frames.append(
@@ -129,8 +123,7 @@ class Mario(pg.sprite.Sprite):
             self.get_image(210, 33, 12, 16))  # Frame 2 of flag pole slide [10]
 
 
-        #Images for small green mario (for invincible animation)#
-
+        # Images for small green mario (for invincible animation)#
         self.right_small_green_frames.append(
             self.get_image(178, 224, 12, 16))  # Right standing [0]
         self.right_small_green_frames.append(
@@ -144,8 +137,7 @@ class Mario(pg.sprite.Sprite):
         self.right_small_green_frames.append(
             self.get_image(130, 224, 14, 16))  # Right skid [5]
 
-        #Images for red mario (for invincible animation)#
-
+        # Images for red mario (for invincible animation)#
         self.right_small_red_frames.append(
             self.get_image(178, 272, 12, 16))  # Right standing [0]
         self.right_small_red_frames.append(
@@ -159,8 +151,7 @@ class Mario(pg.sprite.Sprite):
         self.right_small_red_frames.append(
             self.get_image(130, 272, 14, 16))  # Right skid [5]
 
-        #Images for black mario (for invincible animation)#
-
+        # Images for black mario (for invincible animation)#
         self.right_small_black_frames.append(
             self.get_image(178, 176, 12, 16))  # Right standing [0]
         self.right_small_black_frames.append(
@@ -174,9 +165,7 @@ class Mario(pg.sprite.Sprite):
         self.right_small_black_frames.append(
             self.get_image(130, 176, 14, 16))  # Right skid [5]
 
-
-        #Images for normal big Mario
-
+        # Images for normal big Mario
         self.right_big_normal_frames.append(
             self.get_image(176, 0, 16, 32))  # Right standing [0]
         self.right_big_normal_frames.append(
@@ -200,8 +189,7 @@ class Mario(pg.sprite.Sprite):
         self.right_big_normal_frames.append(
             self.get_image(209, 2, 16, 29))  # Frame 2 of flag pole slide [10]
 
-        #Images for green big Mario#
-
+        # Images for green big Mario#
         self.right_big_green_frames.append(
             self.get_image(176, 192, 16, 32))  # Right standing [0]
         self.right_big_green_frames.append(
@@ -219,8 +207,7 @@ class Mario(pg.sprite.Sprite):
         self.right_big_green_frames.append(
             self.get_image(160, 202, 16, 22))  # Right Crouching [7]
 
-        #Images for red big Mario#
-
+        # Images for red big Mario#
         self.right_big_red_frames.append(
             self.get_image(176, 240, 16, 32))  # Right standing [0]
         self.right_big_red_frames.append(
@@ -238,8 +225,7 @@ class Mario(pg.sprite.Sprite):
         self.right_big_red_frames.append(
             self.get_image(160, 250, 16, 22))  # Right crouching [7]
 
-        #Images for black big Mario#
-
+        # Images for black big Mario#
         self.right_big_black_frames.append(
             self.get_image(176, 144, 16, 32))  # Right standing [0]
         self.right_big_black_frames.append(
@@ -284,9 +270,8 @@ class Mario(pg.sprite.Sprite):
             self.get_image(209, 50, 16, 29))  # Frame 2 of flag pole slide [10]
 
 
-        #The left image frames are numbered the same as the right
-        #frames but are simply reversed.
-
+        # The left image frames are numbered the same as the right
+        # frames but are simply reversed.
         for frame in self.right_small_normal_frames:
             new_image = pg.transform.flip(frame, True, False)
             self.left_small_normal_frames.append(new_image)

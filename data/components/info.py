@@ -1,9 +1,9 @@
 __author__ = 'justinarmstrong'
 
 import pygame as pg
-from .. import setup
-from .. import constants as c
-from . import flashing_coin
+from data import setup
+from data import constants as c
+from data.components import flashing_coin
 
 
 class Character(pg.sprite.Sprite):
@@ -40,7 +40,6 @@ class OverheadInfo(object):
         self.create_time_out_label()
         self.create_main_menu_labels()
 
-
     def create_image_dict(self):
         """Creates the initial images for the score"""
         self.image_dict = {}
@@ -56,7 +55,6 @@ class OverheadInfo(object):
         image_list.append(self.get_image(59, 230, 7, 7))
         image_list.append(self.get_image(67, 230, 7, 7))
         image_list.append(self.get_image(75, 230, 7, 7))
-
         image_list.append(self.get_image(83, 230, 7, 7))
         image_list.append(self.get_image(91, 230, 7, 7))
         image_list.append(self.get_image(99, 230, 7, 7))
@@ -84,17 +82,13 @@ class OverheadInfo(object):
         image_list.append(self.get_image(20, 246, 7, 7))
         image_list.append(self.get_image(27, 246, 7, 7))
         image_list.append(self.get_image(48, 248, 7, 7))
-
         image_list.append(self.get_image(68, 249, 6, 2))
         image_list.append(self.get_image(75, 247, 6, 6))
-
-
 
         character_string = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ -*'
 
         for character, image in zip(character_string, image_list):
             self.image_dict[character] = image
-
 
     def get_image(self, x, y, width, height):
         """Extracts image from sprite sheet"""
@@ -103,17 +97,14 @@ class OverheadInfo(object):
 
         image.blit(self.sprite_sheet, (0, 0), (x, y, width, height))
         image.set_colorkey((92, 148, 252))
-        image = pg.transform.scale(image,
-                                   (int(rect.width*2.9),
-                                    int(rect.height*2.9)))
+        image = pg.transform.scale(image, ( int(rect.width*2.9),
+                                            int(rect.height*2.9)))
         return image
-
 
     def create_score_group(self):
         """Creates the initial empty score (000000)"""
         self.score_images = []
         self.create_label(self.score_images, '000000', 75, 55)
-
 
     def create_info_labels(self):
         """Creates the labels that describe each info"""
@@ -121,7 +112,6 @@ class OverheadInfo(object):
         self.world_label = []
         self.time_label = []
         self.stage_label = []
-
 
         self.create_label(self.mario_label, 'MARIO', 75, 30)
         self.create_label(self.world_label, 'WORLD', 450, 30)
@@ -133,7 +123,6 @@ class OverheadInfo(object):
                            self.time_label,
                            self.stage_label]
 
-
     def create_load_screen_labels(self):
         """Creates labels for the center info of a load screen"""
         world_label = []
@@ -144,12 +133,10 @@ class OverheadInfo(object):
 
         self.center_labels = [world_label, number_label]
 
-
     def create_countdown_clock(self):
         """Creates the count down clock for the level"""
         self.count_down_images = []
         self.create_label(self.count_down_images, str(self.time), 645, 55)
-
 
     def create_label(self, label_list, string, x, y):
         """Creates a label (WORLD, TIME, MARIO)"""
@@ -157,7 +144,6 @@ class OverheadInfo(object):
             label_list.append(Character(self.image_dict[letter]))
 
         self.set_label_rects(label_list, x, y)
-
 
     def set_label_rects(self, label_list, x, y):
         """Set the location of each individual character"""
@@ -168,17 +154,14 @@ class OverheadInfo(object):
                 letter.rect.y += 7
                 letter.rect.x += 2
 
-
     def create_coin_counter(self):
         """Creates the info that tracks the number of coins Mario collects"""
         self.coin_count_images = []
         self.create_label(self.coin_count_images, '*00', 300, 55)
 
-
     def create_flashing_coin(self):
         """Creates the flashing coin next to the coin total"""
         self.flashing_coin = flashing_coin.Coin(280, 53)
-
 
     def create_mario_image(self):
         """Get the mario image"""
@@ -187,11 +170,9 @@ class OverheadInfo(object):
         self.life_total_label = []
         self.create_label(self.life_total_label, str(self.total_lives),
                           450, 285)
-
         self.sprite_sheet = setup.GFX['mario_bros']
         self.mario_image = self.get_image(178, 32, 12, 16)
         self.mario_rect = self.mario_image.get_rect(center=(320, 290))
-
 
     def create_game_over_label(self):
         """Create the label for the GAME OVER screen"""
@@ -200,9 +181,7 @@ class OverheadInfo(object):
 
         self.create_label(game_label, 'GAME', 280, 300)
         self.create_label(over_label, 'OVER', 400, 300)
-
         self.game_over_label = [game_label, over_label]
-
 
     def create_time_out_label(self):
         """Create the label for the time out screen"""
@@ -210,7 +189,6 @@ class OverheadInfo(object):
 
         self.create_label(time_out_label, 'TIME OUT', 290, 310)
         self.time_out_label = [time_out_label]
-
 
     def create_main_menu_labels(self):
         """Create labels for the MAIN MENU screen"""
@@ -227,12 +205,10 @@ class OverheadInfo(object):
         self.main_menu_labels = [player_one_game, player_two_game,
                                  top, top_score]
 
-
     def update(self, level_info, mario=None):
         """Updates all overhead info"""
         self.mario = mario
         self.handle_level_state(level_info)
-
 
     def handle_level_state(self, level_info):
         """Updates info based on what state the game is in"""
@@ -282,7 +258,6 @@ class OverheadInfo(object):
         elif self.state == c.END_OF_LEVEL:
             self.flashing_coin.update(level_info[c.CURRENT_TIME])
 
-
     def update_score_images(self, images, score):
         """Updates what numbers are to be blitted for the score"""
         index = len(images) - 1
@@ -292,7 +267,6 @@ class OverheadInfo(object):
             images[index] = Character(self.image_dict[digit])
             images[index].rect = rect
             index -= 1
-
 
     def update_count_down_clock(self, level_info):
         """Updates current time"""
@@ -311,7 +285,6 @@ class OverheadInfo(object):
         elif len(self.count_down_images) < 3:
             self.count_down_images.insert(0, Character(self.image_dict['0']))
             self.set_label_rects(self.count_down_images, 645, 55)
-
 
     def update_coin_total(self, level_info):
         """Updates the coin total and adjusts label accordingly"""
@@ -332,7 +305,6 @@ class OverheadInfo(object):
 
         self.create_label(self.coin_count_images, coin_string, x, y)
 
-
     def draw(self, surface):
         """Draws overhead info based on state"""
         if self.state == c.MAIN_MENU:
@@ -352,8 +324,6 @@ class OverheadInfo(object):
         else:
             pass
 
-
-
     def draw_main_menu_info(self, surface):
         """Draws info for main menu"""
         for info in self.score_images:
@@ -371,7 +341,6 @@ class OverheadInfo(object):
                 surface.blit(letter.image, letter.rect)
 
         surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
-
 
     def draw_loading_screen_info(self, surface):
         """Draws info for loading screen"""
@@ -397,7 +366,6 @@ class OverheadInfo(object):
 
         surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
 
-
     def draw_level_screen_info(self, surface):
         """Draws info during regular game play"""
         for info in self.score_images:
@@ -414,7 +382,6 @@ class OverheadInfo(object):
                 surface.blit(letter.image, letter.rect)
 
         surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
-
 
     def draw_game_over_screen_info(self, surface):
         """Draws info when game over"""
@@ -434,7 +401,6 @@ class OverheadInfo(object):
 
         surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
 
-
     def draw_time_out_screen_info(self, surface):
         """Draws info when on the time out screen"""
         for info in self.score_images:
@@ -452,12 +418,3 @@ class OverheadInfo(object):
                 surface.blit(letter.image, letter.rect)
 
         surface.blit(self.flashing_coin.image, self.flashing_coin.rect)
-
-
-
-
-
-
-
-
-
