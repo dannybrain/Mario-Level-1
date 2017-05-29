@@ -14,6 +14,7 @@ from data.components import info
 from data.components import score
 from data.components import castle_flag
 
+
 class Level1(tools._State):
 
     def __init__(self):

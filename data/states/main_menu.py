@@ -47,7 +47,6 @@ class Menu(tools._State):
         self.mario.rect.x = 110
         self.mario.rect.bottom = c.GROUND_HEIGHT
 
-    # ICI
     def setup_background(self):
         """Setup the background image to blit"""
         self.background = setup.GFX['level_1']
