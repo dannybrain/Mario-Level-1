@@ -48,6 +48,7 @@ class LoadScreen(tools._State):
 
 class GameOver(LoadScreen):
     """A loading screen with Game Over"""
+
     def __init__(self):
         super(GameOver, self).__init__()
 

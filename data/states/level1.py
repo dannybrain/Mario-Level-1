@@ -55,12 +55,10 @@ class Level1(tools._State):
         proportions"""
         self.background = setup.GFX['level_1']
         self.back_rect = self.background.get_rect()
-        self.background = pg.transform.scale(self.background,
-                                             (int(self.back_rect.width *
-                                              c.BACKGROUND_MULTIPLER),
-                                              int(self.back_rect.height *
-                                              c.BACKGROUND_MULTIPLER))
-                                             )
+        self.background = pg.transform.scale(self.background, (
+            int(self.back_rect.width * c.BACKGROUND_MULTIPLER),
+            int(self.back_rect.height * c.BACKGROUND_MULTIPLER))
+        )
         self.back_rect = self.background.get_rect()
         width = self.back_rect.width
         height = self.back_rect.height
